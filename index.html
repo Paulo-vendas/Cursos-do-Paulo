@@ -7,106 +7,22 @@
 
 <style>
 /* Reset simples */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body{
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-/* Caixa de login */
-.container{
-    background: #1e293b;
-    padding: 20px;
-    margin: 50px auto;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-}
-
-/* Inputs */
-input{
-    width: 95%;
-    padding: 12px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-/* Botões */
-button{
-    padding: 12px;
-    margin: 8px 0;
-    width: 95%;
-    cursor: pointer;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    background: #2563eb;
-    color: white;
-    transition: background 0.3s;
-}
-
-button:hover{
-    background: #1e40af;
-}
-
-/* Mensagem */
-#msg{
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-/* Cursos */
-#cursos{
-    margin-top: 20px;
-}
-
-.curso{
-    background: #334155;
-    margin: 10px auto;
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 400px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-/* Títulos */
-h2{
-    font-size: 1.8em;
-    margin-bottom: 15px;
-}
-
-h3{
-    font-size: 1.4em;
-    margin-bottom: 8px;
-}
-
-/* Responsividade extra */
-@media (max-width: 480px){
-    h2{
-        font-size: 1.5em;
-    }
-    h3{
-        font-size: 1.2em;
-    }
-    input, button{
-        font-size: 0.95em;
-        padding: 10px;
-    }
-    .container, .curso{
-        margin: 30px auto;
-        padding: 15px;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #0f172a; color: white; text-align: center; padding: 10px; }
+.container { background: #1e293b; padding: 20px; margin: 50px auto; width: 90%; max-width: 400px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.4); }
+input { width: 95%; padding: 12px; margin: 8px 0; border: none; border-radius: 5px; font-size: 1em; }
+button { padding: 12px; margin: 8px 0; width: 95%; cursor: pointer; font-size: 1em; border: none; border-radius: 5px; background: #2563eb; color: white; transition: background 0.3s; }
+button:hover { background: #1e40af; }
+#msg { margin-top: 10px; font-weight: bold; }
+#cursos { margin-top: 20px; }
+.curso { background: #334155; margin: 10px auto; padding: 15px; border-radius: 8px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+h2 { font-size: 1.8em; margin-bottom: 15px; }
+h3 { font-size: 1.4em; margin-bottom: 8px; }
+@media (max-width: 480px) {
+    h2 { font-size: 1.5em; }
+    h3 { font-size: 1.2em; }
+    input, button { font-size: 0.95em; padding: 10px; }
+    .container, .curso { margin: 30px auto; padding: 15px; }
 }
 </style>
 </head>
@@ -143,41 +59,64 @@ h3{
 </div>
 
 <script>
+const URL = "http://localhost:3000"; // endereço do servidor Node.js
+let usuarioLogado = "";
 
-function cadastrar(){
-    let user = document.getElementById("usuario").value;
-    let pass = document.getElementById("senha").value;
+// Cadastro
+function cadastrar() {
+    let usuario = document.getElementById("usuario").value;
+    let senha = document.getElementById("senha").value;
     let msg = document.getElementById("msg");
 
-    if(user=="" || pass==""){
-        msg.innerText="Preencha tudo";
-        return;
-    }
+    if(usuario=="" || senha=="") { msg.innerText="Preencha tudo"; return; }
 
-    localStorage.setItem("usuario", user);
-    localStorage.setItem("senha", pass);
-
-    msg.innerText="Conta criada com sucesso!";
+    fetch(`${URL}/cadastrar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, senha })
+    })
+    .then(res => res.json())
+    .then(data => { msg.innerText = data.msg; })
+    .catch(err => { console.log(err); msg.innerText="Erro no cadastro"; });
 }
 
-function entrar(){
-    let user = document.getElementById("usuario").value;
-    let pass = document.getElementById("senha").value;
+// Login
+function entrar() {
+    let usuario = document.getElementById("usuario").value;
+    let senha = document.getElementById("senha").value;
     let msg = document.getElementById("msg");
 
-    let userSalvo = localStorage.getItem("usuario");
-    let passSalvo = localStorage.getItem("senha");
+    if(usuario=="" || senha=="") { msg.innerText="Preencha tudo"; return; }
 
-    if(user==userSalvo && pass==passSalvo){
-        document.getElementById("login").style.display="none";
-        document.getElementById("cursos").style.display="block";
-    }else{
-        msg.innerText="Usuário ou senha incorreto";
-    }
+    fetch(`${URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, senha })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.msg){ msg.innerText = data.msg; }
+        else {
+            usuarioLogado = data.usuario;
+            document.getElementById("login").style.display="none";
+            document.getElementById("cursos").style.display="block";
+        }
+    })
+    .catch(err => { console.log(err); msg.innerText="Erro no login"; });
 }
 
-function comprar(nome){
-    alert("Você comprou o curso de " + nome);
+// Comprar curso
+function comprar(curso) {
+    if(usuarioLogado == "") { alert("Faça login primeiro!"); return; }
+
+    fetch(`${URL}/comprar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario: usuarioLogado, curso })
+    })
+    .then(res => res.json())
+    .then(data => { alert(data.msg); })
+    .catch(err => { console.log(err); alert("Erro ao comprar"); });
 }
 </script>
 
