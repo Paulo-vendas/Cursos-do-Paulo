@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cursos do Paulo</title>
+
+<style>
+/* Reset simples */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Caixa de login */
+.container{
+    background: #1e293b;
+    padding: 20px;
+    margin: 50px auto;
+    width: 90%;       /* responsivo */
+    max-width: 400px; /* não fica gigante em desktop */
+    border-radius: 10px;
+}
+
+/* Inputs */
+input{
+    width: 95%;       /* ocupa quase toda a tela no celular */
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Botões */
+button{
+    padding: 12px;
+    margin: 8px 0;
+    width: 95%;
+    cursor: pointer;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background: #2563eb;
+    color: white;
+    transition: background 0.3s;
+}
+
+button:hover{
+    background: #1e40af;
+}
+
+/* Mensagem */
+#msg{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Cursos */
+#cursos{
+    margin-top: 20px;
+}
+
+.curso{
+    background: #334155;
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 400px;
+}
+
+/* Títulos */
+h2{
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+h3{
+    font-size: 1.4em;
+    margin-bottom: 8px;
+}
+
+/* Responsividade extra */
+@media (max-width: 480px){
+    h2{
+        font-size: 1.5em;
+    }
+    h3{
+        font-size: 1.2em;
+    }
+    input, button{
+        font-size: 0.95em;
+        padding: 10px;
+    }
+    .container, .curso{
+        margin: 30px auto;
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="login">
+<h2>Cursos do Paulo</h2>
+
+<input id="usuario" placeholder="Usuário">
+<input id="senha" type="password" placeholder="Senha">
+
+<button onclick="cadastrar()">Cadastrar</button>
+<button onclick="entrar()">Entrar</button>
+
+<p id="msg"></p>
+</div>
+
+<div id="cursos" style="display:none;">
+<h2>Cursos disponíveis</h2>
+
+<div class="curso">
+<h3>Curso de Python</h3>
+<p>Valor: R$ 50</p>
+<button onclick="comprar('Python')">Comprar</button>
+</div>
+
+<div class="curso">
+<h3>Curso de HTML</h3>
+<p>Valor: R$ 30</p>
+<button onclick="comprar('HTML')">Comprar</button>
+</div>
+
+</div>
+
+<script>
+
+function cadastrar(){
+    let user = document.getElementById("usuario").value;
+    let pass = document.getElementById("senha").value;
+    let msg = document.getElementById("msg");
+
+    if(user=="" || pass==""){
+        msg.innerText="Preencha tudo";
+        return;
+    }
+
+    localStorage.setItem("usuario", user);
+    localStorage.setItem("senha", pass);
+
+    msg.innerText="Conta criada com sucesso!";
+}
+
+function entrar(){
+    let user = document.getElementById("usuario").value;
+    let pass = document.getElementById("senha").value;
+    let msg = document.getElementById("msg");
+
+    let userSalvo = localStorage.getItem("usuario");
+    let passSalvo = localStorage.getItem("senha");
+
+    if(user==userSalvo && pass==passSalvo){
+        document.getElementById("login").style.display="none";
+        document.getElementById("cursos").style.display="block";
+    }else{
+        msg.innerText="Usuário ou senha incorreto";
+    }
+}
+
+function comprar(nome){
+    alert("Você comprou o curso de " + nome);
+}
+</script>
+
+</body>
+</html>
