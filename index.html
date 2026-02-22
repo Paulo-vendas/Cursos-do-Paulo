@@ -75,53 +75,41 @@ button{
 
 <script>
 
-async function cadastrar(){
+function cadastrar(){
+    let user = document.getElementById("usuario").value
+    let pass = document.getElementById("senha").value
+    let msg = document.getElementById("msg")
 
-let user = document.getElementById("usuario").value
-let pass = document.getElementById("senha").value
+    if(!user || !pass){
+        msg.innerText = "Preencha usuário e senha"
+        return
+    }
 
-let res = await fetch("http://localhost:3000/cadastrar",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({usuario:user,senha:pass})
-})
+    // Salva no localStorage
+    localStorage.setItem("usuario", user)
+    localStorage.setItem("senha", pass)
 
-let data = await res.json()
-
-document.getElementById("msg").innerText=data.msg
-
+    msg.innerText = "Conta criada com sucesso!"
 }
 
-async function entrar(){
+function entrar(){
+    let user = document.getElementById("usuario").value
+    let pass = document.getElementById("senha").value
+    let msg = document.getElementById("msg")
 
-let user = document.getElementById("usuario").value
-let pass = document.getElementById("senha").value
+    let userSalvo = localStorage.getItem("usuario")
+    let passSalvo = localStorage.getItem("senha")
 
-let res = await fetch("http://localhost:3000/login",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({usuario:user,senha:pass})
-})
-
-let data = await res.json()
-
-if(data.ok){
-
-document.getElementById("login").style.display="none"
-document.getElementById("cursos").style.display="block"
-
-}else{
-
-document.getElementById("msg").innerText=data.msg
-
-}
-
+    if(user === userSalvo && pass === passSalvo){
+        document.getElementById("login").style.display = "none"
+        document.getElementById("cursos").style.display = "block"
+    } else {
+        msg.innerText = "Usuário ou senha incorreto"
+    }
 }
 
 function comprar(nome){
-
-alert("Compra registrada: "+nome)
-
+    alert("Compra registrada: "+nome)
 }
 
 </script>
