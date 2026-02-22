@@ -63,19 +63,20 @@ button{
 
 <div class="curso">
 <h3>Curso Python</h3>
+<p>Valor: R$ 50</p>
 <button onclick="comprar('Python')">Comprar</button>
 </div>
 
 <div class="curso">
 <h3>Curso HTML</h3>
+<p>Valor: R$ 30</p>
 <button onclick="comprar('HTML')">Comprar</button>
 </div>
 
 </div>
 
 <script>
-
-function cadastrar(){
+async function cadastrar(){
     let user = document.getElementById("usuario").value
     let pass = document.getElementById("senha").value
     let msg = document.getElementById("msg")
@@ -85,33 +86,46 @@ function cadastrar(){
         return
     }
 
-    // Salva no localStorage
-    localStorage.setItem("usuario", user)
-    localStorage.setItem("senha", pass)
-
-    msg.innerText = "Conta criada com sucesso!"
+    try{
+        let res = await fetch("http://localhost:3000/cadastrar", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({usuario:user, senha:pass})
+        })
+        let data = await res.json()
+        msg.innerText = data.msg
+    }catch(e){
+        msg.innerText = "Erro no servidor!"
+    }
 }
 
-function entrar(){
+async function entrar(){
     let user = document.getElementById("usuario").value
     let pass = document.getElementById("senha").value
     let msg = document.getElementById("msg")
 
-    let userSalvo = localStorage.getItem("usuario")
-    let passSalvo = localStorage.getItem("senha")
+    try{
+        let res = await fetch("http://localhost:3000/login", {
+            method:"POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({usuario:user, senha:pass})
+        })
+        let data = await res.json()
 
-    if(user === userSalvo && pass === passSalvo){
-        document.getElementById("login").style.display = "none"
-        document.getElementById("cursos").style.display = "block"
-    } else {
-        msg.innerText = "Usuário ou senha incorreto"
+        if(data.ok){
+            document.getElementById("login").style.display="none"
+            document.getElementById("cursos").style.display="block"
+        }else{
+            msg.innerText = data.msg
+        }
+    }catch(e){
+        msg.innerText = "Erro no servidor!"
     }
 }
 
 function comprar(nome){
     alert("Compra registrada: "+nome)
 }
-
 </script>
 
 </body>
