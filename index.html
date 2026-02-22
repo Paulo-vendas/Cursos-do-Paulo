@@ -1,88 +1,114 @@
-<!DOCTYPE html>  <html lang="pt-br">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>Cursos do Paulo</title>  <style>  
-body{  
-    font-family: Arial;  
-    background:#0f172a;  
-    color:white;  
-    text-align:center;  
-}  
-  
-.container{  
-    background:#1e293b;  
-    padding:20px;  
-    margin:50px auto;  
-    max-width:400px;  
-    border-radius:10px;  
-}  
-  
-input, button{  
-    width:90%;  
-    padding:10px;  
-    margin:5px;  
-}  
-  
-button{  
-    background:#2563eb;  
-    color:white;  
-    border:none;  
-}  
-  
-.curso{  
-    background:#334155;  
-    padding:10px;  
-    margin:10px;  
-}  
-</style>  </head>  <body>  <div class="container" id="login">  <h2>Cursos do Paulo</h2>  <input id="usuario" placeholder="Usuário">  
-<input id="senha" type="password" placeholder="Senha">  <button onclick="cadastrar()">Cadastrar</button>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursos do Paulo</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+}
+
+.container{
+    background:#1e293b;
+    padding:20px;
+    margin:50px auto;
+    max-width:400px;
+    border-radius:10px;
+}
+
+input, button{
+    width:90%;
+    padding:10px;
+    margin:5px;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.curso{
+    background:#334155;
+    padding:10px;
+    margin:10px;
+    border-radius:5px;
+}
+a{
+    color:#2563eb;
+    text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="login">
+<h2>Cursos do Paulo</h2>
+
+<input id="usuario" placeholder="Usuário">
+<input id="senha" type="password" placeholder="Senha">
+
+<button onclick="cadastrar()">Cadastrar</button>
 <button onclick="entrar()">Entrar</button>
 
-<p id="msg"></p>  </div>  <div id="cursos" style="display:none;">  <h2>Cursos disponíveis</h2>  <div class="curso">  
-<h3>Curso Python</h3>  
-<button onclick="comprar('Python')">Comprar</button>  
-</div>  <div class="curso">  
-<h3>Curso HTML</h3>  
-<button onclick="comprar('HTML')">Comprar</button>  
-</div>  </div>  <script>  
-  
-function cadastrar(){  
-    let user = document.getElementById("usuario").value  
-    let pass = document.getElementById("senha").value  
-    let msg = document.getElementById("msg")  
-  
-    if(!user || !pass){  
-        msg.innerText = "Preencha usuário e senha"  
-        return  
-    }  
-  
-    // Salva no localStorage  
-    localStorage.setItem("usuario", user)  
-    localStorage.setItem("senha", pass)  
-  
-    msg.innerText = "Conta criada com sucesso!"  
-}  
-  
-function entrar(){  
-    let user = document.getElementById("usuario").value  
-    let pass = document.getElementById("senha").value  
-    let msg = document.getElementById("msg")  
-  
-    let userSalvo = localStorage.getItem("usuario")  
-    let passSalvo = localStorage.getItem("senha")  
-  
-    if(user === userSalvo && pass === passSalvo){  
-        document.getElementById("login").style.display = "none"  
-        document.getElementById("cursos").style.display = "block"  
-    } else {  
-        msg.innerText = "Usuário ou senha incorreto"  
-    }  
-}  
-  
-function comprar(nome){  
-    alert("Compra registrada: "+nome)  
-}  
-  
-</script>  </body>  
+<p id="msg"></p>
+</div>
+
+<div id="cursos" style="display:none;">
+<h2>Cursos disponíveis</h2>
+
+<div class="curso">
+<h3>Curso Python</h3>
+<p>Valor: R$ 50</p>
+<button onclick="comprar('Python')">Comprar</button>
+</div>
+
+<div class="curso">
+<h3>Curso HTML</h3>
+<p>Valor: R$ 30</p>
+<button onclick="comprar('HTML')">Comprar</button>
+</div>
+
+<p>Se tiver algum problema ou dúvida, fale comigo no Instagram: 
+<a href="https://www.instagram.com/seuusuario" target="_blank">@seuusuario</a></p>
+</div>
+
+<script>
+function cadastrar(){
+    let user = document.getElementById("usuario").value
+    let pass = document.getElementById("senha").value
+    let msg = document.getElementById("msg")
+
+    if(!user || !pass){
+        msg.innerText = "Preencha usuário e senha"
+        return
+    }
+
+    msg.innerText = "Conta criada com sucesso!"
+}
+
+function entrar(){
+    let user = document.getElementById("usuario").value
+    let pass = document.getElementById("senha").value
+    let msg = document.getElementById("msg")
+
+    if(user && pass){
+        document.getElementById("login").style.display = "none"
+        document.getElementById("cursos").style.display = "block"
+    } else {
+        msg.innerText = "Preencha usuário e senha"
+    }
+}
+
+function comprar(nome){
+    alert("Compra registrada: "+nome)
+}
+</script>
+
+</body>
 </html>
