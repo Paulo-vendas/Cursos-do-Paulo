@@ -11,91 +11,73 @@ body{
     background:#0f172a;
     color:white;
     text-align:center;
+    margin:0;
 }
 
 .container{
-    background:#1e293b;
-    padding:20px;
-    margin:50px auto;
-    max-width:500px;
-    border-radius:10px;
+    padding:30px;
+    max-width:800px;
+    margin:auto;
 }
 
-input, button{
-    width:90%;
-    padding:10px;
-    margin:5px;
+.produto{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+}
+
+.preco-antigo{
+    text-decoration:line-through;
+    color:#f87171;
+    font-size:20px;
+}
+
+.preco-novo{
+    color:#22c55e;
+    font-size:35px;
+    font-weight:bold;
+}
+
+.desconto{
+    background:#ef4444;
+    padding:8px 15px;
+    border-radius:8px;
+    display:inline-block;
+    margin-bottom:15px;
+    font-weight:bold;
 }
 
 button{
     background:#22c55e;
     color:white;
     border:none;
+    padding:15px 30px;
+    font-size:18px;
+    border-radius:8px;
     cursor:pointer;
-    font-weight:bold;
+    margin-top:20px;
 }
 
 button:hover{
     background:#16a34a;
 }
 
-.produto{
-    background:#334155;
-    padding:20px;
-    margin:20px auto;
-    border-radius:10px;
-    max-width:700px;
-}
-
-.preco-antigo{
-    text-decoration:line-through;
-    color:#f87171;
-    font-size:18px;
-}
-
-.preco-novo{
-    color:#22c55e;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.desconto{
-    background:#ef4444;
-    padding:5px 10px;
-    border-radius:5px;
-    display:inline-block;
-    margin-bottom:10px;
-    font-weight:bold;
-}
-
 ul{
     text-align:left;
+    max-width:600px;
+    margin:auto;
 }
-
 a{
-    color:#2563eb;
-    text-decoration:none;
+    color:#38bdf8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="login">
-<h2>Área do Aluno</h2>
+<div class="container">
 
-<input id="usuario" placeholder="Usuário">
-<input id="senha" type="password" placeholder="Senha">
-
-<button onclick="cadastrar()">Cadastrar</button>
-<button onclick="entrar()">Entrar</button>
-
-<p id="msg"></p>
-</div>
-
-<div id="cursos" style="display:none;">
-
-<h1>GUIA-DEFINITIVO-DO-ENEM</h1>
+<h1>GUIA DEFINITIVO DO ENEM</h1>
 
 <div class="produto">
 
@@ -104,40 +86,33 @@ a{
 <p class="preco-antigo">De R$ 50,00</p>
 <p class="preco-novo">Por apenas R$ 25,00</p>
 
-<h3>Descrição: Guia Definitivo do Enem (Versão Profissional)</h3>
+<h3>Descrição (Versão Profissional)</h3>
 
 <p>
-Este guia é um manual prático e objetivo para quem deseja uma preparação de alto nível para o Enem.
-Ele foca na estratégia de prova e na organização eficiente do estudo, indo direto ao que importa
-para aumentar sua nota.
+Manual estratégico e direto ao ponto para aumentar sua nota no ENEM.
+Foco total em método, estratégia de prova e organização inteligente.
 </p>
 
-<h3>O que o conteúdo oferece:</h3>
+<h3>O que você vai aprender:</h3>
 
 <ul>
-<li><strong>Estrutura do Exame:</strong> Entenda exatamente como a prova é montada.</li>
-<li><strong>Gestão de Tempo e Ansiedade:</strong> Estratégias para manter a calma e dominar o relógio no dia do exame.</li>
-<li><strong>TRI na Prática:</strong> Como funciona a correção do Enem e como usar essa lógica para valorizar sua pontuação.</li>
-<li><strong>Resolução de Alto Desempenho:</strong> Técnicas para identificar questões fáceis em menos de 5 segundos.</li>
-<li><strong>Eliminação Avançada:</strong> Métodos para descartar alternativas erradas com segurança.</li>
-<li><strong>Rotina por Turnos:</strong> Organização estratégica para quem estuda à tarde ou à noite.</li>
-<li><strong>Análise de Desempenho:</strong> Como usar simulados para evoluir constantemente.</li>
-<li><strong>Redação e Estratégia por Áreas:</strong> Caminho para nota alta na redação e desempenho máximo nas áreas do conhecimento.</li>
+<li>✔ Estrutura real do exame</li>
+<li>✔ Como funciona a TRI na prática</li>
+<li>✔ Técnicas para resolver questões fáceis em segundos</li>
+<li>✔ Eliminação avançada de alternativas</li>
+<li>✔ Gestão de tempo e ansiedade</li>
+<li>✔ Estratégia de redação</li>
+<li>✔ Organização de rotina por turno</li>
+<li>✔ Como analisar simulados para evoluir</li>
 </ul>
-
-<h3>Objetivo do Guia:</h3>
-
-<p>
-Oferecer um método profissional e organizado para que você pare de perder tempo e foque
-nas táticas que realmente colocam o aluno dentro da universidade.
-</p>
 
 <button onclick="comprar()">COMPRAR AGORA</button>
 
 </div>
 
-<p>
+<p style="margin-top:30px;">
 Dúvidas? Fale comigo no Instagram:
+<br>
 <a href="https://www.instagram.com/Paulo_vendas_original" target="_blank">
 @Paulo_vendas_original
 </a>
@@ -146,34 +121,8 @@ Dúvidas? Fale comigo no Instagram:
 </div>
 
 <script>
-function cadastrar(){
-    let user = document.getElementById("usuario").value
-    let pass = document.getElementById("senha").value
-    let msg = document.getElementById("msg")
-
-    if(!user || !pass){
-        msg.innerText = "Preencha usuário e senha"
-        return
-    }
-
-    msg.innerText = "Conta criada com sucesso!"
-}
-
-function entrar(){
-    let user = document.getElementById("usuario").value
-    let pass = document.getElementById("senha").value
-    let msg = document.getElementById("msg")
-
-    if(user && pass){
-        document.getElementById("login").style.display = "none"
-        document.getElementById("cursos").style.display = "block"
-    } else {
-        msg.innerText = "Preencha usuário e senha"
-    }
-}
-
 function comprar(){
-    alert("Redirecione aqui para o link de pagamento (Kiwify ou outra plataforma)")
+    window.location.href = "COLE_AQUI_SEU_LINK_DA_KIWIFY";
 }
 </script>
 
