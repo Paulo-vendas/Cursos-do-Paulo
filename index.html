@@ -20,17 +20,17 @@ body{
     margin:auto;
 }
 
-.produto, .login-box{
+.login-box, .produto{
     background:#1e293b;
     padding:35px;
     border-radius:15px;
-    margin-top:20px;
+    margin-top:30px;
 }
 
 input{
     padding:10px;
     width:80%;
-    margin:8px;
+    margin:10px;
 }
 
 button{
@@ -41,7 +41,7 @@ button{
     font-size:16px;
     border-radius:8px;
     cursor:pointer;
-    margin-top:10px;
+    margin:10px;
 }
 
 button:hover{
@@ -66,11 +66,6 @@ button:hover{
     font-size:28px;
     font-weight:bold;
 }
-
-.mensagem{
-    margin-top:10px;
-    color:#f87171;
-}
 </style>
 </head>
 
@@ -80,28 +75,26 @@ button:hover{
 
 <h1>Guia Definitivo do ENEM</h1>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginBox">
-<h2>Entrar ou Cadastrar</h2>
+<!-- TELA INICIAL -->
+<div class="login-box" id="login">
+<h2>Bem-vindo</h2>
 
-<input type="text" id="usuario" placeholder="Usuário">
-<br>
-<input type="password" id="senha" placeholder="Senha">
+<input type="text" id="nome" placeholder="Digite seu nome">
 <br>
 
 <button onclick="cadastrar()">Cadastrar</button>
 <button onclick="entrar()">Entrar</button>
 
-<p class="mensagem" id="mensagem"></p>
+<p id="mensagem"></p>
 </div>
 
-<!-- AREA DO PRODUTO -->
-<div class="produto" id="areaProduto" style="display:none;">
+<!-- PÁGINA DE VENDAS -->
+<div class="produto" id="paginaVendas" style="display:none;">
 
-<h2>Área do Aluno</h2>
+<h2 id="boasVindas"></h2>
 
 <p class="preco-antigo">De R$ 50,00</p>
-<p class="preco-novo">Por R$ 25,00</p>
+<p class="preco-novo">Por apenas R$ 25,00</p>
 
 <h3>O que você vai aprender:</h3>
 
@@ -111,8 +104,7 @@ button:hover{
 <div class="topico">Gestão de tempo</div>
 <div class="topico">Estratégia de redação</div>
 
-<button onclick="comprar()">Comprar Agora</button>
-<button onclick="sair()">Sair</button>
+<button onclick="comprar()">COMPRAR AGORA</button>
 
 </div>
 
@@ -120,45 +112,27 @@ button:hover{
 
 <script>
 function cadastrar(){
-    let user = document.getElementById("usuario").value;
-    let pass = document.getElementById("senha").value;
-    let msg = document.getElementById("mensagem");
-
-    if(!user || !pass){
-        msg.innerText = "Preencha usuário e senha.";
-        return;
+    let nome = document.getElementById("nome").value;
+    if(nome == ""){
+        document.getElementById("mensagem").innerText = "Digite seu nome primeiro.";
+    } else {
+        document.getElementById("mensagem").innerText = "Cadastro feito com sucesso!";
     }
-
-    localStorage.setItem("usuario", user);
-    localStorage.setItem("senha", pass);
-
-    msg.style.color = "#22c55e";
-    msg.innerText = "Conta criada com sucesso!";
 }
 
 function entrar(){
-    let user = document.getElementById("usuario").value;
-    let pass = document.getElementById("senha").value;
-    let msg = document.getElementById("mensagem");
-
-    let savedUser = localStorage.getItem("usuario");
-    let savedPass = localStorage.getItem("senha");
-
-    if(user === savedUser && pass === savedPass){
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("areaProduto").style.display = "block";
+    let nome = document.getElementById("nome").value;
+    if(nome == ""){
+        document.getElementById("mensagem").innerText = "Digite seu nome para entrar.";
     } else {
-        msg.innerText = "Usuário ou senha incorretos.";
+        document.getElementById("login").style.display = "none";
+        document.getElementById("paginaVendas").style.display = "block";
+        document.getElementById("boasVindas").innerText = "Olá, " + nome + "!";
     }
 }
 
-function sair(){
-    document.getElementById("loginBox").style.display = "block";
-    document.getElementById("areaProduto").style.display = "none";
-}
-
 function comprar(){
-    window.location.href = "#"; // coloque aqui o link da Kiwify depois
+    window.location.href = "#"; // depois coloque seu link da Kiwify aqui
 }
 </script>
 
