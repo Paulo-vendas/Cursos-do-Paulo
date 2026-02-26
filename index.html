@@ -20,32 +20,32 @@ body{
     margin:auto;
 }
 
-.produto{
+.produto, .login-box{
     background:#1e293b;
     padding:35px;
     border-radius:15px;
+    margin-top:20px;
 }
 
-.preco-antigo{
-    text-decoration:line-through;
-    color:#f87171;
-    font-size:20px;
+input{
+    padding:10px;
+    width:80%;
+    margin:8px;
 }
 
-.preco-novo{
-    color:#22c55e;
-    font-size:38px;
-    font-weight:bold;
-}
-
-.desconto{
-    background:#ef4444;
-    padding:8px 18px;
+button{
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    font-size:16px;
     border-radius:8px;
-    display:inline-block;
-    margin-bottom:15px;
-    font-weight:bold;
-    font-size:18px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+button:hover{
+    background:#16a34a;
 }
 
 .topico{
@@ -56,29 +56,20 @@ body{
     font-weight:bold;
 }
 
-button{
-    background:#22c55e;
-    color:white;
-    border:none;
-    padding:18px 35px;
-    font-size:20px;
-    border-radius:10px;
-    cursor:pointer;
-    margin-top:25px;
+.preco-antigo{
+    text-decoration:line-through;
+    color:#f87171;
 }
 
-button:hover{
-    background:#16a34a;
+.preco-novo{
+    color:#22c55e;
+    font-size:28px;
+    font-weight:bold;
 }
 
-.alerta{
-    margin-top:15px;
-    font-size:14px;
-    color:#94a3b8;
-}
-
-a{
-    color:#38bdf8;
+.mensagem{
+    margin-top:10px;
+    color:#f87171;
 }
 </style>
 </head>
@@ -88,54 +79,86 @@ a{
 <div class="container">
 
 <h1>Guia Definitivo do ENEM</h1>
-<p style="color:#94a3b8;">Página Oficial de Vendas</p>
 
-<div class="produto">
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
+<h2>Entrar ou Cadastrar</h2>
 
-<div class="desconto">50% DE DESCONTO</div>
+<input type="text" id="usuario" placeholder="Usuário">
+<br>
+<input type="password" id="senha" placeholder="Senha">
+<br>
+
+<button onclick="cadastrar()">Cadastrar</button>
+<button onclick="entrar()">Entrar</button>
+
+<p class="mensagem" id="mensagem"></p>
+</div>
+
+<!-- AREA DO PRODUTO -->
+<div class="produto" id="areaProduto" style="display:none;">
+
+<h2>Área do Aluno</h2>
 
 <p class="preco-antigo">De R$ 50,00</p>
-<p class="preco-novo">Por apenas R$ 25,00</p>
-
-<h3>Descrição Profissional</h3>
-
-<p>
-Manual estratégico e direto ao ponto para aumentar sua nota no ENEM.
-Foco total em método, estratégia de prova e organização inteligente.
-</p>
+<p class="preco-novo">Por R$ 25,00</p>
 
 <h3>O que você vai aprender:</h3>
 
 <div class="topico">Estrutura real do exame</div>
-<div class="topico">Como funciona a TRI na prática</div>
-<div class="topico">Técnicas para resolver questões fáceis rapidamente</div>
-<div class="topico">Eliminação avançada de alternativas</div>
-<div class="topico">Gestão de tempo e ansiedade</div>
-<div class="topico">Estratégia completa de redação</div>
-<div class="topico">Organização de rotina por turno</div>
-<div class="topico">Como analisar simulados para evoluir</div>
+<div class="topico">Como funciona a TRI</div>
+<div class="topico">Eliminação avançada</div>
+<div class="topico">Gestão de tempo</div>
+<div class="topico">Estratégia de redação</div>
 
-<button onclick="comprar()">QUERO GARANTIR MEU ACESSO</button>
-
-<p class="alerta">
-Após o pagamento você receberá o guia imediatamente.
-</p>
+<button onclick="comprar()">Comprar Agora</button>
+<button onclick="sair()">Sair</button>
 
 </div>
-
-<p style="margin-top:40px;">
-Dúvidas? Fale comigo no Instagram:
-<br>
-<a href="https://www.instagram.com/Paulo_vendas_original" target="_blank">
-@Paulo_vendas_original
-</a>
-</p>
 
 </div>
 
 <script>
+function cadastrar(){
+    let user = document.getElementById("usuario").value;
+    let pass = document.getElementById("senha").value;
+    let msg = document.getElementById("mensagem");
+
+    if(!user || !pass){
+        msg.innerText = "Preencha usuário e senha.";
+        return;
+    }
+
+    localStorage.setItem("usuario", user);
+    localStorage.setItem("senha", pass);
+
+    msg.style.color = "#22c55e";
+    msg.innerText = "Conta criada com sucesso!";
+}
+
+function entrar(){
+    let user = document.getElementById("usuario").value;
+    let pass = document.getElementById("senha").value;
+    let msg = document.getElementById("mensagem");
+
+    let savedUser = localStorage.getItem("usuario");
+    let savedPass = localStorage.getItem("senha");
+
+    if(user === savedUser && pass === savedPass){
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("areaProduto").style.display = "block";
+    } else {
+        msg.innerText = "Usuário ou senha incorretos.";
+    }
+}
+
+function sair(){
+    document.getElementById("loginBox").style.display = "block";
+    document.getElementById("areaProduto").style.display = "none";
+}
+
 function comprar(){
-    window.location.href = "#";
+    window.location.href = "#"; // coloque aqui o link da Kiwify depois
 }
 </script>
 
