@@ -118,4 +118,64 @@ para aumentar sua nota.
 <li><strong>Estrutura do Exame:</strong> Entenda exatamente como a prova é montada.</li>
 <li><strong>Gestão de Tempo e Ansiedade:</strong> Estratégias para manter a calma e dominar o relógio no dia do exame.</li>
 <li><strong>TRI na Prática:</strong> Como funciona a correção do Enem e como usar essa lógica para valorizar sua pontuação.</li>
-<li><strong>Resolução de Alto Desem
+<li><strong>Resolução de Alto Desempenho:</strong> Técnicas para identificar questões fáceis em menos de 5 segundos.</li>
+<li><strong>Eliminação Avançada:</strong> Métodos para descartar alternativas erradas com segurança.</li>
+<li><strong>Rotina por Turnos:</strong> Organização estratégica para quem estuda à tarde ou à noite.</li>
+<li><strong>Análise de Desempenho:</strong> Como usar simulados para evoluir constantemente.</li>
+<li><strong>Redação e Estratégia por Áreas:</strong> Caminho para nota alta na redação e desempenho máximo nas áreas do conhecimento.</li>
+</ul>
+
+<h3>Objetivo do Guia:</h3>
+
+<p>
+Oferecer um método profissional e organizado para que você pare de perder tempo e foque
+nas táticas que realmente colocam o aluno dentro da universidade.
+</p>
+
+<button onclick="comprar()">COMPRAR AGORA</button>
+
+</div>
+
+<p>
+Dúvidas? Fale comigo no Instagram:
+<a href="https://www.instagram.com/Paulo_vendas_original" target="_blank">
+@Paulo_vendas_original
+</a>
+</p>
+
+</div>
+
+<script>
+function cadastrar(){
+    let user = document.getElementById("usuario").value
+    let pass = document.getElementById("senha").value
+    let msg = document.getElementById("msg")
+
+    if(!user || !pass){
+        msg.innerText = "Preencha usuário e senha"
+        return
+    }
+
+    msg.innerText = "Conta criada com sucesso!"
+}
+
+function entrar(){
+    let user = document.getElementById("usuario").value
+    let pass = document.getElementById("senha").value
+    let msg = document.getElementById("msg")
+
+    if(user && pass){
+        document.getElementById("login").style.display = "none"
+        document.getElementById("cursos").style.display = "block"
+    } else {
+        msg.innerText = "Preencha usuário e senha"
+    }
+}
+
+function comprar(){
+    alert("Redirecione aqui para o link de pagamento (Kiwify ou outra plataforma)")
+}
+</script>
+
+</body>
+</html>
