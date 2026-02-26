@@ -28,20 +28,23 @@ body{
 }
 
 input{
-    padding:10px;
+    padding:12px;
     width:80%;
     margin:10px;
+    border-radius:8px;
+    border:none;
 }
 
 button{
     background:#22c55e;
     color:white;
     border:none;
-    padding:12px 25px;
+    padding:14px 28px;
     font-size:16px;
     border-radius:8px;
     cursor:pointer;
     margin:10px;
+    font-weight:bold;
 }
 
 button:hover{
@@ -50,7 +53,7 @@ button:hover{
 
 .topico{
     background:#334155;
-    padding:12px;
+    padding:14px;
     margin:10px 0;
     border-radius:8px;
     font-weight:bold;
@@ -59,12 +62,19 @@ button:hover{
 .preco-antigo{
     text-decoration:line-through;
     color:#f87171;
+    font-size:18px;
 }
 
 .preco-novo{
     color:#22c55e;
-    font-size:28px;
+    font-size:32px;
     font-weight:bold;
+}
+
+.destaque{
+    font-size:20px;
+    margin-bottom:15px;
+    color:#cbd5e1;
 }
 </style>
 </head>
@@ -74,10 +84,13 @@ button:hover{
 <div class="container">
 
 <h1>Guia Definitivo do ENEM</h1>
+<p class="destaque">
+O método direto ao ponto para aumentar sua nota mesmo estudando sozinho.
+</p>
 
 <!-- TELA INICIAL -->
 <div class="login-box" id="login">
-<h2>Bem-vindo</h2>
+<h2>Acesse o conteúdo</h2>
 
 <input type="text" id="nome" placeholder="Digite seu nome">
 <br>
@@ -91,18 +104,27 @@ button:hover{
 <!-- PÁGINA DE VENDAS -->
 <div class="produto" id="paginaVendas" style="display:none;">
 
-<h2 id="boasVindas"></h2>
+<h2>Domine a estratégia certa e saia na frente</h2>
+
+<p>
+Esse guia reúne as técnicas que realmente funcionam para quem quer
+aumentar a nota no ENEM sem perder tempo com estudo aleatório.
+</p>
 
 <p class="preco-antigo">De R$ 50,00</p>
 <p class="preco-novo">Por apenas R$ 25,00</p>
 
 <h3>O que você vai aprender:</h3>
 
-<div class="topico">Estrutura real do exame</div>
-<div class="topico">Como funciona a TRI</div>
-<div class="topico">Eliminação avançada</div>
-<div class="topico">Gestão de tempo</div>
-<div class="topico">Estratégia de redação</div>
+<div class="topico">✔ Estrutura real do exame</div>
+<div class="topico">✔ Como funciona a TRI na prática</div>
+<div class="topico">✔ Técnica de eliminação avançada</div>
+<div class="topico">✔ Gestão de tempo estratégica</div>
+<div class="topico">✔ Modelo de estratégia para redação</div>
+
+<p style="margin-top:20px;">
+Acesso imediato após a confirmação do pagamento.
+</p>
 
 <button onclick="comprar()">COMPRAR AGORA</button>
 
@@ -127,12 +149,11 @@ function entrar(){
     } else {
         document.getElementById("login").style.display = "none";
         document.getElementById("paginaVendas").style.display = "block";
-        document.getElementById("boasVindas").innerText = "Olá, " + nome + "!";
     }
 }
 
 function comprar(){
-    window.location.href = "#"; // depois coloque seu link da Kiwify aqui
+    window.location.href = "#"; // coloque aqui seu link da Kiwify
 }
 </script>
 
