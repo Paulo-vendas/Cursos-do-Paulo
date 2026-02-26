@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cursos do Paulo</title>
+<title>Guia Definitivo do ENEM</title>
+
 <style>
 body{
     font-family: Arial, sans-serif;
@@ -16,7 +17,7 @@ body{
     background:#1e293b;
     padding:20px;
     margin:50px auto;
-    max-width:400px;
+    max-width:500px;
     border-radius:10px;
 }
 
@@ -27,28 +28,61 @@ input, button{
 }
 
 button{
-    background:#2563eb;
+    background:#22c55e;
     color:white;
     border:none;
     cursor:pointer;
+    font-weight:bold;
 }
 
-.curso{
-    background:#334155;
-    padding:10px;
-    margin:10px;
-    border-radius:5px;
+button:hover{
+    background:#16a34a;
 }
+
+.produto{
+    background:#334155;
+    padding:20px;
+    margin:20px auto;
+    border-radius:10px;
+    max-width:700px;
+}
+
+.preco-antigo{
+    text-decoration:line-through;
+    color:#f87171;
+    font-size:18px;
+}
+
+.preco-novo{
+    color:#22c55e;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.desconto{
+    background:#ef4444;
+    padding:5px 10px;
+    border-radius:5px;
+    display:inline-block;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+ul{
+    text-align:left;
+}
+
 a{
     color:#2563eb;
     text-decoration:none;
 }
 </style>
 </head>
+
 <body>
 
 <div class="container" id="login">
-<h2>Cursos do Paulo</h2>
+<h2>Área do Aluno</h2>
 
 <input id="usuario" placeholder="Usuário">
 <input id="senha" type="password" placeholder="Senha">
@@ -60,55 +94,28 @@ a{
 </div>
 
 <div id="cursos" style="display:none;">
-<h2>Cursos disponíveis</h2>
 
-<div class="curso">
-<h3>Curso Python</h3>
-<p>Valor: R$ 50</p>
-<button onclick="comprar('Python')">Comprar</button>
-</div>
+<h1>GUIA-DEFINITIVO-DO-ENEM</h1>
 
-<div class="curso">
-<h3>Curso HTML</h3>
-<p>Valor: R$ 30</p>
-<button onclick="comprar('HTML')">Comprar</button>
-</div>
+<div class="produto">
 
-<p>Se tiver algum problema ou dúvida, fale comigo no Instagram: 
-<a href="https://www.instagram.com/Paulo_vendas_original" target="_blank">@Paulo_vendas_original</a></p>
-</div>
+<div class="desconto">🔥 50% DE DESCONTO</div>
 
-<script>
-function cadastrar(){
-    let user = document.getElementById("usuario").value
-    let pass = document.getElementById("senha").value
-    let msg = document.getElementById("msg")
+<p class="preco-antigo">De R$ 50,00</p>
+<p class="preco-novo">Por apenas R$ 25,00</p>
 
-    if(!user || !pass){
-        msg.innerText = "Preencha usuário e senha"
-        return
-    }
+<h3>Descrição: Guia Definitivo do Enem (Versão Profissional)</h3>
 
-    msg.innerText = "Conta criada com sucesso!"
-}
+<p>
+Este guia é um manual prático e objetivo para quem deseja uma preparação de alto nível para o Enem.
+Ele foca na estratégia de prova e na organização eficiente do estudo, indo direto ao que importa
+para aumentar sua nota.
+</p>
 
-function entrar(){
-    let user = document.getElementById("usuario").value
-    let pass = document.getElementById("senha").value
-    let msg = document.getElementById("msg")
+<h3>O que o conteúdo oferece:</h3>
 
-    if(user && pass){
-        document.getElementById("login").style.display = "none"
-        document.getElementById("cursos").style.display = "block"
-    } else {
-        msg.innerText = "Preencha usuário e senha"
-    }
-}
-
-function comprar(nome){
-    alert("Compra registrada: "+nome)
-}
-</script>
-
-</body>
-</html>
+<ul>
+<li><strong>Estrutura do Exame:</strong> Entenda exatamente como a prova é montada.</li>
+<li><strong>Gestão de Tempo e Ansiedade:</strong> Estratégias para manter a calma e dominar o relógio no dia do exame.</li>
+<li><strong>TRI na Prática:</strong> Como funciona a correção do Enem e como usar essa lógica para valorizar sua pontuação.</li>
+<li><strong>Resolução de Alto Desem
